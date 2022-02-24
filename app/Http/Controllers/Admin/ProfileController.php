@@ -33,11 +33,19 @@ class ProfileController extends Controller
 
       $profile->fill($form);
       $profile->save();
-      
+
       return redirect('admin/profile/create');
     }
 
-    public function edit()
+    public function edit(Request $request)
+    {
+      $news = Profile::find($request->id);
+      if (empty($profile)) {
+        abort(404);
+      }
+      return view('admin.profile.edit', ['profile_form' => $profile]);
+    }
+
     {
       return view('admin.profile.edit');
     }
